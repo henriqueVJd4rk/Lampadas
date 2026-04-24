@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Casa Inteligente - SENAI</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
+</head>
+<body>
+
+  <header>
+    <div class="header-inner">
+      <div class="header-logo-area">
+        <img src="logotipo-senai.png" alt="Logo SENAI" class="logo"/>
+      </div>
+      <div class="header-texto">
+        <h1>Sistema de Controle Residencial</h1>
+        <span>Automação com ESP32 + MQTT</span>
+      </div>
+    </div>
+    <div class="header-faixa"></div>
+  </header>
+
+  <main>
+    <div class="grid">
+
+      <!-- SALA -->
+      <div class="card">
+        <div class="lampada-wrap">
+          <div class="lampada" id="lp-sala">
+            <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" class="icone-lampada">
+              <ellipse cx="32" cy="28" rx="18" ry="20" class="bulbo"/>
+              <path d="M26 48 Q24 56 28 60 Q32 64 36 60 Q40 56 38 48 Z" class="base"/>
+              <rect x="27" y="60" width="10" height="3" rx="2" class="anel"/>
+              <rect x="28" y="63" width="8" height="3" rx="2" class="anel"/>
+              <line x1="32" y1="8" x2="32" y2="2" class="raio top"/>
+              <line x1="48" y1="14" x2="52" y2="10" class="raio"/>
+              <line x1="16" y1="14" x2="12" y2="10" class="raio"/>
+              <line x1="54" y1="28" x2="60" y2="28" class="raio"/>
+              <line x1="10" y1="28" x2="4" y2="28" class="raio"/>
+            </svg>
+          </div>
+        </div>
+        <h2>Sala</h2>
+        <div class="botoes">
+          <button class="btn-ligar"    onclick="ligarLampadaSala()">⚡ Ligar</button>
+          <button class="btn-desligar" onclick="DesligarLampadaSala()">✕ Desligar</button>
+        </div>
+      </div>
+
+      <!-- COZINHA -->
+      <div class="card">
+        <div class="lampada-wrap">
+          <div class="lampada" id="lp-cozinha">
+            <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" class="icone-lampada">
+              <ellipse cx="32" cy="28" rx="18" ry="20" class="bulbo"/>
+              <path d="M26 48 Q24 56 28 60 Q32 64 36 60 Q40 56 38 48 Z" class="base"/>
+              <rect x="27" y="60" width="10" height="3" rx="2" class="anel"/>
+              <rect x="28" y="63" width="8" height="3" rx="2" class="anel"/>
+              <line x1="32" y1="8" x2="32" y2="2" class="raio top"/>
+              <line x1="48" y1="14" x2="52" y2="10" class="raio"/>
+              <line x1="16" y1="14" x2="12" y2="10" class="raio"/>
+              <line x1="54" y1="28" x2="60" y2="28" class="raio"/>
+              <line x1="10" y1="28" x2="4" y2="28" class="raio"/>
+            </svg>
+          </div>
+        </div>
+        <h2>Cozinha</h2>
+        <div class="botoes">
+          <button class="btn-ligar"    onclick="ligarLampadaCozinha()">⚡ Ligar</button>
+          <button class="btn-desligar" onclick="DesligarLampadaCozinha()">✕ Desligar</button>
+        </div>
+      </div>
+
+      <!-- QUARTO 1 -->
+      <div class="card">
+        <div class="lampada-wrap">
+          <div class="lampada" id="lp-quarto1">
+            <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" class="icone-lampada">
+              <ellipse cx="32" cy="28" rx="18" ry="20" class="bulbo"/>
+              <path d="M26 48 Q24 56 28 60 Q32 64 36 60 Q40 56 38 48 Z" class="base"/>
+              <rect x="27" y="60" width="10" height="3" rx="2" class="anel"/>
+              <rect x="28" y="63" width="8" height="3" rx="2" class="anel"/>
+              <line x1="32" y1="8" x2="32" y2="2" class="raio top"/>
+              <line x1="48" y1="14" x2="52" y2="10" class="raio"/>
+              <line x1="16" y1="14" x2="12" y2="10" class="raio"/>
+              <line x1="54" y1="28" x2="60" y2="28" class="raio"/>
+              <line x1="10" y1="28" x2="4" y2="28" class="raio"/>
+            </svg>
+          </div>
+        </div>
+        <h2>Quarto 1</h2>
+        <div class="botoes">
+          <button class="btn-ligar"    onclick="ligarLampadaQuarto1()">⚡ Ligar</button>
+          <button class="btn-desligar" onclick="DesligarLampadaQuarto1()">✕ Desligar</button>
+        </div>
+      </div>
+
+      <!-- QUARTO 2 -->
+      <div class="card">
+        <div class="lampada-wrap">
+          <div class="lampada" id="lp-quarto2">
+            <svg viewBox="0 0 64 80" xmlns="http://www.w3.org/2000/svg" class="icone-lampada">
+              <ellipse cx="32" cy="28" rx="18" ry="20" class="bulbo"/>
+              <path d="M26 48 Q24 56 28 60 Q32 64 36 60 Q40 56 38 48 Z" class="base"/>
+              <rect x="27" y="60" width="10" height="3" rx="2" class="anel"/>
+              <rect x="28" y="63" width="8" height="3" rx="2" class="anel"/>
+              <line x1="32" y1="8" x2="32" y2="2" class="raio top"/>
+              <line x1="48" y1="14" x2="52" y2="10" class="raio"/>
+              <line x1="16" y1="14" x2="12" y2="10" class="raio"/>
+              <line x1="54" y1="28" x2="60" y2="28" class="raio"/>
+              <line x1="10" y1="28" x2="4" y2="28" class="raio"/>
+            </svg>
+          </div>
+        </div>
+        <h2>Quarto 2</h2>
+        <div class="botoes">
+          <button class="btn-ligar"    onclick="ligarLampadaQuarto2()">⚡ Ligar</button>
+          <button class="btn-desligar" onclick="DesligarLampadaQuarto2()">✕ Desligar</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>SENAI &copy; 2026 — Henrique Jacomini, Lucas Oliveira e Enzo Moraes</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
